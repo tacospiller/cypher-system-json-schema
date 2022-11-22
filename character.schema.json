@@ -1,0 +1,200 @@
+{
+    "$id": "https://raw.githubusercontent.com/tacospiller/cypher-system-json-schema/main/character.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Character",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The character's name."
+        },
+        "statement": {
+            "type": "object",
+            "description": "A character in cypher system is described as a statement in a form: 'I am a [descriptor] [type] who [focus].'",
+            "properties": {
+                "descriptor": {
+                    "type": "string",
+                    "description": "The character's descriptor. Must be an adjective."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The character's type. Must be a noun."
+                },
+                "focus": {
+                    "type": "string",
+                    "description": "The character's focus. Must be a verb."
+                }
+            }
+        },
+        "stats": {
+            "type": "object",
+            "properties": {
+                "tier": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "effort": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "xp": {
+                    "type": "integer",
+                    "minimum": 0  
+                },
+                "might": { "$ref": "#/$defs/stat" },
+                "speed": { "$ref": "#/$defs/stat" },
+                "intellect": { "$ref": "#/$defs/stat" },
+                "armor": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "recoveryBonus": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "recoveryRolls": {
+                    "action": { "type": "boolean" },
+                    "10mins": { "type": "boolean" },
+                    "1hour": { "type": "boolean" },
+                    "10hours": { "type": "boolean" }
+                }
+            }
+        },
+        "advancements": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/skill" }
+        },
+        "attacks": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/attack" }
+        },
+        "skills": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/skill" }
+        },
+        "specialAbilities": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/specialAbility" }
+        },
+        "cypherLimit": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "cyphers": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/cypher" }
+        },
+        "equipments": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/equipment" }
+        },
+        "shins": {
+            "type": "integer"
+        },
+        "artifacts": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/artifact" }
+        },
+        "oddities": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/equipment" }
+        },
+        "background": { "type": "string" },
+        "notes": { "type": "string" },
+        "image": { 
+            "type": "string",
+            "format": "uri"
+        }
+    },
+    "$defs": {
+        "stat": {
+            "type": "object",
+            "properties": {
+                "pool": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "The maximum value for this stat."
+                },
+                "current": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "The current value for this stat."
+                },
+                "edge": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "The edge for this stat."
+                }
+            }
+        },
+        "advancement":  {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" }
+            }
+        },
+        "attack":  {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "damage": { 
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "modifier": { 
+                    "type": "integer"
+                }
+            }
+        },
+        "skill": {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "trained": { "type": "boolean" },
+                "specialized": { "type": "boolean" },
+                "inability": { "type": "boolean" }
+            }
+        },
+        "specialAbility": {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" }
+            }
+        },
+        "equipment":  {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" }
+            }
+        },
+        "cypher": {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "level": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "used": { "type": "boolean" }
+            }
+        },
+        "artifact": {
+            "type": "object",
+            "properties": {
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "level": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "depleted": { "type": "boolean" }
+            }
+        }
+    }
+}
